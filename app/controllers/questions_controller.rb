@@ -14,6 +14,7 @@ class QuestionsController < ApplicationController
   
   def create
     @question = Question.new(question_params)
+    @question.image_name = "default_question.jpg"
     if @question.save
       redirect_to root_path, notice: 'Success'
     else
@@ -44,6 +45,6 @@ class QuestionsController < ApplicationController
   
   private
     def question_params
-       params.require(:question).permit(:name, :title, :content)
+       params.require(:question).permit(:name, :title, :content, :image_name)
     end
 end
