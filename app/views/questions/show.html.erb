@@ -1,22 +1,37 @@
 <div class="row">
   <div class="col-md-12">
-    <h2><%= @question.title %></h2>
-    <div>
-      Content: <%= @question.content %>
-    </div>
-    <div>
-      Name: <%= @question.name %>
-    </div>
+    <h3 class="bg-info my-3">Posts</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>
+            <h4><%= @question.title %></h4>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>
+              <p>Content: <%= @question.content %><p>
+              <p><small>Posted by: <%= @question.name %></small></p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
     <div>
-      <h3>Answer</h3>
-      <table class="table table-striped">
+      <h3 class="bg-info">Answer</h3>
+      <table class="table table-hover">
         <% if @question.answers.any? %>
-          <thead class="thead-light">
+          <thead>
             <tr>
               <td>Answer</td>
               <td>Name</td>
-              <td>Menu</td>
+              <td>Edit</td>
+              <td>Delete</td>
+              
             </tr>
           </thead>
           <tbody>
@@ -31,6 +46,8 @@
               </td>
               <td>
                 [<%= link_to 'Edit', edit_question_answer_path(@question, answer) %>] 
+              </td>
+              <td>
                 [<%= link_to 'Delete', question_answer_path(@question, answer), 
                   method: :delete, data:{ confirm: 'Are you sure?'} %> ]
               </td>
@@ -43,7 +60,7 @@
       </table>
     </div>
 
-    <h3>Post new answer.</h3>
+    <h3 class="bg-info">Post new answer.</h3>
       <%= form_with model: [@question, @answer], local: true do |f| %>
       <%= f.hidden_field :question_id, { value: @question.id} %>
       <div class="form-group">
@@ -55,7 +72,7 @@
         <%= f.text_area :content, class: "form-control" %>
       </div>
       <div class="text-center">
-        <%= f.submit "Post", class: 'btn btn-primary' %>
+        <%= f.submit "Post", class: 'btn btn-info' %>
       </div>      
       
       <% end %>
